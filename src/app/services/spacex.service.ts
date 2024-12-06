@@ -1,14 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import {map, Observable} from 'rxjs';
+import {Country} from '../interfaces/countries';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SpaceXService {
-
+export class CountriesService {
   apollo = inject(Apollo);
 
-  getLaunches() {
+  getCountries() {
     const GET_COUNTRIES_QUERY = gql`
       query {
         countries {

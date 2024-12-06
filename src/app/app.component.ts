@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {LaunchesComponent} from './components/launches/launches.component';
+import {CountriesComponent} from './components/countries/countries.component';
+import {LearnRxjsComponent} from './components/learn-rxjs/learn-rxjs/learn-rxjs.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LaunchesComponent],
+  imports: [RouterOutlet, CountriesComponent, LearnRxjsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
