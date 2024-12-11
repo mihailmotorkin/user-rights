@@ -1,35 +1,24 @@
-<!--<ul>-->
-<!--  @for (country of countries; track country) {-->
-<!--    <li>-->
-<!--      <span>{{ country.capital }}</span>-->
-<!--      <span [style]="{'margin-left': '10px'}">{{ country.code }}</span>-->
-<!--    </li>-->
-<!--  }-->
-<!--</ul>-->
+<div class="wrapper">
+  <ul>
+    @for (country of countries$ | async; track country) {
+      <li>
+        <div class="country-list__item-wrapper">
+          <p>
+            Country name is: <span>{{ country.name }}</span>
+          </p>
+          <p>
+            Capital is: <span>{{ country.capital }}</span>
+          </p>
+          <p>
+            Currency is: <span>{{ country.currency }}</span>
+          </p>
+        </div>
+      </li>
+    }
+  </ul>
 
-<!--@if (!countries) {-->
-<!--  <p>Loading...</p>-->
-<!--}-->
-
-<!--<ul *ngIf="(countries$ | async) as countries; else loading">-->
-<!--  <li *ngFor="let country of countries">-->
-<!--    <span>{{ country.capital }}</span>-->
-<!--    <span [style]="{'margin-left': '10px'}">{{ country.code }}</span>-->
-<!--  </li>-->
-<!--</ul>-->
-
-<!--<ng-template #loading>-->
-<!--  <p>Loading...</p>-->
-<!--</ng-template>-->
-
-<ul>
-  @for (country of countries$ | async; track country) {
-    <li>
-      <span>{{ country.capital }}</span>
-      <span [style]="{'margin-left': '10px'}">{{ country.code }}</span>
-    </li>
-  }
-</ul>
+  <p-button label="Update" icon="pi pi-refresh" iconPos="bottom" (click)="update()"/>
+</div>
 
 @if (!countries$) {
   <p>Loading...</p>

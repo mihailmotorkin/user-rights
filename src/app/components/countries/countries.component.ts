@@ -1,8 +1,8 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {CountriesService} from '../../services/spacex.service';
-import {AsyncPipe, CommonModule, NgForOf, NgIf} from '@angular/common';
-import {map, Observable} from 'rxjs';
-import { Country } from '../../interfaces/countries';
+import {CountriesService} from '../../services/countries.service';
+import {AsyncPipe, CommonModule} from '@angular/common';
+import {Observable} from 'rxjs';
+import {ButtonModule} from 'primeng/button';
 
 @Component({
   selector: 'app-countries',
@@ -11,29 +11,28 @@ import { Country } from '../../interfaces/countries';
   imports: [
     AsyncPipe,
     CommonModule,
-    NgIf,
-    NgForOf
+    ButtonModule,
   ],
   styleUrl: './countries.component.scss'
 })
 export class CountriesComponent implements OnInit {
   countriesService = inject(CountriesService);
 
-  countries$: Observable<Country[]> | undefined;
-  countries: Country[] = [];
+  countries$: Observable<any> | undefined;
 
   ngOnInit() {
-    // this.countriesService.getLaunches().subscribe((result: any) => {
-      // this.countries = result.data?.countries;
-      this.countries$ = this.countriesService.getCountries()
-        .pipe(
-          map(result => {
-            // console.log(result);
-            // @ts-ignore
-            return result.data.countries;
-          })
-        );
-    // });
+    this.countries$ = this.countriesService.getCountries()
   }
 
+  update() {
+    console.log('Update Countries Component');
+    this.countriesService.updateCountries('US', 'United States of America').subscribe(
+      (result) => {
+        console.log('Country updated:', result);
+      },
+      error => {
+        console.log('Error updating country:', error);
+      }
+    )
+  }
 }

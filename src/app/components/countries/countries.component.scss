@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.country-list__item-wrapper {
+  span {
+    font-style: italic;
+    font-weight: 800;
+  }
+}
