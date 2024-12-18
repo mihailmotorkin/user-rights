@@ -1,0 +1,87 @@
+<div>
+  <form [formGroup]="userForm">
+    <div class="form__wrapper">
+      <div class="user__wrapper">
+        <div class="input__wrapper">
+          <label>User Name</label>
+          <input type="text" pInputText formControlName="name"/>
+        </div>
+        <div class="input__wrapper">
+          <label>User age</label>
+          <input type="text" pInputText formControlName="age"/>
+        </div>
+        <div class="input__wrapper">
+          <label>User Id</label>
+          <input type="text" pInputText formControlName="id"/>
+        </div>
+
+        <p-button
+          class="add-btn"
+          label="Add User"
+          icon="pi pi-plus"
+          iconPos="bottom"
+          (click)="addUser()"
+          [disabled]="userForm.invalid"
+        />
+      </div>
+      <div class="posts__wrapper">
+        <div class="input__wrapper">
+          <label>Post Content</label>
+          <input type="text" pInputText formControlName="content"/>
+        </div>
+        <div class="input__wrapper">
+          <label>Post Title</label>
+          <input type="text" pInputText formControlName="title"/>
+        </div>
+        <div class="input__wrapper">
+          <label>User Id</label>
+          <input type="text" pInputText formControlName="userId"/>
+        </div>
+
+        <p-button
+          label="Add Post"
+          icon="pi pi-refresh"
+          iconPos="bottom"
+          [disabled]="userForm.invalid"
+          (click)="addPost()"
+        />
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+<div class="wrapper">
+  <ul>
+    @for (post of posts$ | async; track post.id) {
+      <li>
+        <div class="list__item-wrapper">
+          <p>
+            This is: <span>{{ post.title }}</span>
+          </p>
+        </div>
+        <div class="list__item-wrapper">
+          <p>
+            <span>{{ post.content }}</span>
+          </p>
+        </div>
+        <div class="list__item-wrapper">
+          <p>
+            User name is: <span>{{ post.user?.name }}</span>
+          </p>
+        </div>
+        <div class="list__item-wrapper">
+          <p>
+            User age is: <span>{{ post.user?.age }}</span>
+          </p>
+        </div>
+      </li>
+    }
+  </ul>
+
+</div>
+
+@if (!posts$) {
+  <p>Loading...</p>
+}

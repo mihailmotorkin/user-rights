@@ -1,0 +1,29 @@
+.form__wrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.user__wrapper,
+.posts__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.input__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.list__item-wrapper {
+  span {
+    font-style: italic;
+    font-weight: 800;
+  }
+}
