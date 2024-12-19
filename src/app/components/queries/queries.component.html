@@ -1,61 +1,84 @@
-<div>
+<div class="form__wrapper">
   <form [formGroup]="userForm">
-    <div class="form__wrapper">
-      <div class="user__wrapper">
-        <div class="input__wrapper">
-          <label>User Name</label>
-          <input type="text" pInputText formControlName="name"/>
-        </div>
-        <div class="input__wrapper">
-          <label>User age</label>
-          <input type="text" pInputText formControlName="age"/>
-        </div>
-        <div class="input__wrapper">
-          <label>User Id</label>
-          <input type="text" pInputText formControlName="id"/>
-        </div>
-
-        <p-button
-          class="add-btn"
-          label="Add User"
-          icon="pi pi-plus"
-          iconPos="bottom"
-          (click)="addUser()"
-          [disabled]="userForm.invalid"
-        />
+    <div class="user__wrapper">
+      <div class="input__wrapper">
+        <label>User Name</label>
+        <input type="text" pInputText formControlName="name"/>
       </div>
-      <div class="posts__wrapper">
-        <div class="input__wrapper">
-          <label>Post Content</label>
-          <input type="text" pInputText formControlName="content"/>
-        </div>
-        <div class="input__wrapper">
-          <label>Post Title</label>
-          <input type="text" pInputText formControlName="title"/>
-        </div>
-        <div class="input__wrapper">
-          <label>User Id</label>
-          <input type="text" pInputText formControlName="userId"/>
-        </div>
-
-        <p-button
-          label="Add Post"
-          icon="pi pi-refresh"
-          iconPos="bottom"
-          [disabled]="userForm.invalid"
-          (click)="addPost()"
-        />
+      <div class="input__wrapper">
+        <label>User age</label>
+        <input type="text" pInputText formControlName="age"/>
+      </div>
+      <div class="input__wrapper">
+        <label>User Id</label>
+        <input type="text" pInputText formControlName="id"/>
       </div>
 
+      <p-button
+        class="add-btn"
+        label="Add User"
+        icon="pi pi-plus"
+        iconPos="bottom"
+        [disabled]="userForm.invalid"
+        (click)="addUser()"
+      />
     </div>
 
   </form>
+</div>
+<div class="form__wrapper">
+  <form [formGroup]="postForm">
+    <div class="posts__wrapper">
+      <div class="input__wrapper">
+        <label>Post Content</label>
+        <input type="text" pInputText formControlName="content"/>
+      </div>
+      <div class="input__wrapper">
+        <label>Post Title</label>
+        <input type="text" pInputText formControlName="title"/>
+      </div>
+      <div class="input__wrapper">
+        <label>User Id</label>
+        <input type="text" pInputText formControlName="userId"/>
+      </div>
+
+      <p-button
+        label="Add Post"
+        icon="pi pi-refresh"
+        iconPos="bottom"
+        [disabled]="postForm.invalid"
+        (click)="addPost()"
+      />
+    </div>
+  </form>
+</div>
+
+<div class="form__wrapper">
+  <form [formGroup]="deletePostsForm">
+    <div class="input__wrapper">
+      <label>Which Post do you want to remove?</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="postId"
+        placeholder="please enter the post id"
+      >
+    </div>
+  </form>
+  <p-button
+    label="Delete Post"
+    icon="pi pi-trash"
+    iconPos="bottom"
+    [disabled]="deletePostsForm.invalid"
+    (click)="deletePost()"
+  ></p-button>
 </div>
 
 <div class="wrapper">
   <ul>
     @for (post of posts$ | async; track post.id) {
       <li>
+        <span>Post id is: {{ post.id }}</span>
         <div class="list__item-wrapper">
           <p>
             This is: <span>{{ post.title }}</span>

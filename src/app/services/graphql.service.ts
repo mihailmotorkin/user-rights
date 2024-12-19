@@ -82,5 +82,24 @@ export class GraphqlService {
     })
   }
 
+  deletePostsById(keyId: number) {
+    const DELETE_POST_BY_ID = gql`
+      mutation DeletePosts($keyId:  Int4!) {
+        deletePostsById(keyId: $keyId) {
+          returning {
+            content
+            id
+            title
+            userId
+          }
+        }
+      }
+    `
+    return this.apollo.mutate({
+      mutation: DELETE_POST_BY_ID,
+      variables: { keyId }
+    })
+  }
+
 
 }
