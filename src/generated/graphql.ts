@@ -503,6 +503,13 @@ export type AddPostsMutationVariables = Exact<{
 
 export type AddPostsMutation = { __typename?: 'Mutation', insertPosts: { __typename?: 'InsertPostsResponse', returning: Array<{ __typename?: 'Posts', content: any, title: any, userId: any, user?: { __typename?: 'Users', age: any, name: any, id: any } | null }> } };
 
+export type DeletePostsMutationVariables = Exact<{
+  keyId: Scalars['Int4']['input'];
+}>;
+
+
+export type DeletePostsMutation = { __typename?: 'Mutation', deletePostsById: { __typename?: 'DeletePostsByIdResponse', returning: Array<{ __typename?: 'Posts', content: any, id: any, title: any, userId: any }> } };
+
 export const GetPostsDocument = gql`
     query GetPosts {
   posts {
@@ -572,6 +579,29 @@ export const AddPostsDocument = gql`
   })
   export class AddPostsGQL extends Apollo.Mutation<AddPostsMutation, AddPostsMutationVariables> {
     document = AddPostsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeletePostsDocument = gql`
+    mutation DeletePosts($keyId: Int4!) {
+  deletePostsById(keyId: $keyId) {
+    returning {
+      content
+      id
+      title
+      userId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeletePostsGQL extends Apollo.Mutation<DeletePostsMutation, DeletePostsMutationVariables> {
+    document = DeletePostsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

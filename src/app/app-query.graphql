@@ -35,3 +35,14 @@ mutation AddPosts($content: Text!, $title:  Text!, $userId: Int4!) {
     }
   }
 }
+
+mutation DeletePosts($keyId:  Int4!) {
+        deletePostsById(keyId: $keyId) {
+          returning {
+            content
+            id
+            title
+            userId
+          }
+        }
+      }
