@@ -1,0 +1,27 @@
+query GetUsers {
+  users {
+    age
+    id
+    name
+  }
+}
+
+mutation AddUser($userName: Text!, $userAge: Int4!, $userId: Int4!) {
+  insertUsers(objects: {name: $userName, age: $userAge, id: $userId}) {
+    returning {
+      age
+      name
+      id
+    }
+  }
+}
+
+mutation DeleteUsers($keyId: Int4!) {
+  deleteUsersById(keyId: $keyId) {
+    returning {
+      age
+      id
+      name
+    }
+  }
+}

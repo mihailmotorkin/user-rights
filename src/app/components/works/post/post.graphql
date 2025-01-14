@@ -11,16 +11,6 @@ query GetPosts {
   }
 }
 
-mutation AddUser($userName: Text!, $userAge: Int4!, $userId: Int4!) {
-  insertUsers(objects: {name: $userName, age: $userAge, id: $userId}) {
-    returning {
-      age
-      name
-      id
-    }
-  }
-}
-
 mutation AddPosts($content: Text!, $title:  Text!, $userId: Int4!) {
   insertPosts(objects: {content: $content, title: $title, userId: $userId}) {
     returning {

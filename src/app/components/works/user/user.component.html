@@ -1,0 +1,13 @@
+<p>User works !!!</p>
+
+<div class="users">
+  <ul>
+    @for (user of users$ | async; track user.id) {
+      <li>
+        <p>User id is: {{ user.id }}</p>
+        <p>User name is: {{ user.name }}</p>
+        <p>User age is: {{ user.age }}</p>
+      </li>
+    }
+  </ul>
+</div>

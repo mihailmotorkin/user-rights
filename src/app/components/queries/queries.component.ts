@@ -6,7 +6,10 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Apollo, QueryRef} from 'apollo-angular';
-import {AddPostsGQL, GetPostsGQL, GetPostsQuery} from '../../../generated/graphql';
+// import {AddPostsGQL, GetPostsGQL, GetPostsQuery} from '../../../generated/graphql';
+import {UserComponent} from '../works/user/user.component';
+import {AddPostsGQL, GetPostsGQL} from '../works/post/post.service';
+import {GetPostsQuery} from '../works/post/post.interface';
 
 
 @Component({
@@ -18,7 +21,8 @@ import {AddPostsGQL, GetPostsGQL, GetPostsQuery} from '../../../generated/graphq
     CommonModule,
     ButtonModule,
     ReactiveFormsModule,
-    InputTextModule
+    InputTextModule,
+    UserComponent
   ],
   styleUrl: './queries.component.scss'
 })
