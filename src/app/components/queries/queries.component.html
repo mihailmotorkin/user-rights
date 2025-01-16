@@ -53,6 +53,13 @@
   </form>
 </div>
 
+<p-button
+  label="Show all users"
+  icon="pi pi-arrow-right"
+  iconPos="right"
+  routerLink="/users"
+></p-button>
+
 <div class="form__wrapper">
   <form [formGroup]="deletePostsForm">
     <div class="input__wrapper">
@@ -109,4 +116,4 @@
   <p>Loading...</p>
 }
 
-<app-user></app-user>
+<!--<router-outlet></router-outlet>-->

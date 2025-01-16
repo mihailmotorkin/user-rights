@@ -3,12 +3,27 @@ import * as Types from '../../../../generated/graphql';
 import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import {
-  AddUserMutation,
-  AddUserMutationVariables,
-  DeleteUsersMutation,
-  DeleteUsersMutationVariables, GetUsersQuery, GetUsersQueryVariables
-} from "./user.interface";
+export type GetUsersQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type GetUsersQuery = { __typename?: 'Query', users?: Array<{ __typename?: 'Users', age: any, id: any, name: any }> | null };
+
+export type AddUserMutationVariables = Types.Exact<{
+  userName: Types.Scalars['Text']['input'];
+  userAge: Types.Scalars['Int4']['input'];
+  userId: Types.Scalars['Int4']['input'];
+}>;
+
+
+export type AddUserMutation = { __typename?: 'Mutation', insertUsers: { __typename?: 'InsertUsersResponse', returning: Array<{ __typename?: 'Users', age: any, name: any, id: any }> } };
+
+export type DeleteUsersMutationVariables = Types.Exact<{
+  keyId: Types.Scalars['Int4']['input'];
+}>;
+
+
+export type DeleteUsersMutation = { __typename?: 'Mutation', deleteUsersById: { __typename?: 'DeleteUsersByIdResponse', returning: Array<{ __typename?: 'Users', age: any, id: any, name: any }> } };
+
 export const GetUsersDocument = gql`
     query GetUsers {
   users {
@@ -24,7 +39,7 @@ export const GetUsersDocument = gql`
   })
   export class GetUsersGQL extends Apollo.Query<GetUsersQuery, GetUsersQueryVariables> {
     document = GetUsersDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -46,7 +61,7 @@ export const AddUserDocument = gql`
   })
   export class AddUserGQL extends Apollo.Mutation<AddUserMutation, AddUserMutationVariables> {
     document = AddUserDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -68,7 +83,7 @@ export const DeleteUsersDocument = gql`
   })
   export class DeleteUsersGQL extends Apollo.Mutation<DeleteUsersMutation, DeleteUsersMutationVariables> {
     document = DeleteUsersDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }

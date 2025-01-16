@@ -1,11 +1,9 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
-const basePath = 'src/app/components/works/';
-
 const config: CodegenConfig = {
   overwrite: true,
   schema: "http://localhost:3280/graphql",
-  documents: `${basePath}**/*.graphql`,
+  documents: './src/**/*.graphql',
   ignoreNoDocuments: true,
   generates: {
     // Общие типы
@@ -15,11 +13,11 @@ const config: CodegenConfig = {
       ]
     },
     // Интерфейсы
-    [`${basePath}*.interface.ts`]: {
+    './src/': {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.interface.ts',
-        baseTypesPath: '../../../../generated/graphql.ts',
+        baseTypesPath: 'generated/graphql',
       },
       plugins: [
         "typescript-operations",
@@ -33,13 +31,14 @@ const config: CodegenConfig = {
       },
     },
     // Сервисы
-    [`${basePath}*.service.ts`]: {
+    './src': {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.service.ts',
-        baseTypesPath: '../../../../generated/graphql.ts',
+        baseTypesPath: 'generated/graphql',
       },
       plugins: [
+        "typescript-operations",
         "typescript-apollo-angular",
       ],
       config: {

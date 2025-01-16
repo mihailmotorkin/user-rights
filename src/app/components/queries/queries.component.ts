@@ -6,14 +6,13 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Apollo, QueryRef} from 'apollo-angular';
-// import {AddPostsGQL, GetPostsGQL, GetPostsQuery} from '../../../generated/graphql';
-import {UserComponent} from '../works/user/user.component';
 import {AddPostsGQL, GetPostsGQL} from '../works/post/post.service';
 import {GetPostsQuery} from '../works/post/post.interface';
+import {RouterLink} from '@angular/router';
 
 
 @Component({
-  selector: 'app-countries',
+  selector: 'app-queries',
   standalone: true,
   templateUrl: './queries.component.html',
   imports: [
@@ -22,7 +21,7 @@ import {GetPostsQuery} from '../works/post/post.interface';
     ButtonModule,
     ReactiveFormsModule,
     InputTextModule,
-    UserComponent
+    RouterLink,
   ],
   styleUrl: './queries.component.scss'
 })
@@ -53,12 +52,6 @@ export class QueriesComponent implements OnInit {
   });
 
   ngOnInit() {
-    // this.posts$ = this.graphqlService.getData()
-    //   .valueChanges
-    //   .pipe(
-    //     map(result => result.data.posts),
-    //   );
-
     // @ts-ignore
     this.postsQuery = this.postsGQL.watch();
     this.posts$ = this.postsQuery.valueChanges.pipe(
