@@ -57,7 +57,7 @@
   label="Show all users"
   icon="pi pi-arrow-right"
   iconPos="right"
-  routerLink="/users"
+  [routerLink]="['/users']"
 ></p-button>
 
 <div class="form__wrapper">
@@ -115,5 +115,3 @@
 @if (!posts$) {
   <p>Loading...</p>
 }
-
-<!--<router-outlet></router-outlet>-->

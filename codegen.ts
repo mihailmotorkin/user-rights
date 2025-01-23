@@ -2,52 +2,39 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: "http://localhost:3280/graphql",
+  schema: 'http://localhost:3280/graphql',
   documents: './src/**/*.graphql',
   ignoreNoDocuments: true,
   generates: {
-    // Общие типы
-    "src/generated/graphql.ts": {
-      plugins: [
-        "typescript",
-      ]
+    // Base TypeScript types
+    'src/generated/graphql.ts': {
+      plugins: ["typescript", "typescript-operations", "typed-document-node"]
     },
-    // Интерфейсы
-    './src/': {
+    // Interfaces
+    './src': {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.interface.ts',
         baseTypesPath: 'generated/graphql',
       },
-      plugins: [
-        "typescript-operations",
-      ],
-      config: {
-        dedupeOperationSuffix: true,
-        skipTypename: false,
-        namingConvention: {
-          enumValues: 'keep',
-        },
-      },
+      plugins: ["typescript-operations"],
     },
-    // Сервисы
-    './src': {
+    // Services
+    './src/': {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.service.ts',
         baseTypesPath: 'generated/graphql',
       },
-      plugins: [
-        "typescript-operations",
-        "typescript-apollo-angular",
-      ],
+      plugins: ["typescript-apollo-angular"],
       config: {
-        dedupeOperationSuffix: true,
-        namingConvention: {
-          enumValues: 'keep',
-        },
-      },
+        importOperationTypesFrom: 'Types',
+      }
     },
+    // Custom plugin
+    './src/**': {
+      plugins:  ['./src/codegen-plugins/my-plugin.js'],
+    }
   },
 };
 

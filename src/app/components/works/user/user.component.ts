@@ -2,10 +2,10 @@ import {Component, inject, OnInit} from '@angular/core';
 import {AsyncPipe} from '@angular/common';
 import {map, Observable} from 'rxjs';
 import {QueryRef} from 'apollo-angular';
-import {GetUsersQuery} from './user.interface';
-import {GetUsersGQL} from './user.service';
 import {Button} from 'primeng/button';
 import {RouterLink} from '@angular/router';
+import {GetUsersGQL} from './user.service';
+import {GetUsersQuery} from './user.interface';
 
 @Component({
   selector: 'app-user',
