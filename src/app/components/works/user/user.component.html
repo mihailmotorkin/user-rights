@@ -16,3 +16,29 @@
     }
   </ul>
 </div>
+
+<div class="swagger-test">
+  <form [formGroup]="form">
+    <label>
+      <input formControlName="name" placeholder="Введите значение">
+    </label>
+    <label>
+      <input formControlName="description" placeholder="Введите значение">
+    </label>
+    <button (click)="createRole()">Создать роль</button>
+  </form>
+  <label>
+    <input [formControl]="roleIdInput" placeholder="Введите значение">
+  </label>
+  <button (click)="deleteRoleById()">Удалить роль</button>
+  <button>Изменить роль</button>
+  <ul>
+    @for (role of roles$ | async; track role.id) {
+      <li>
+        <p>Role id is: {{ role.id }}</p>
+        <p>Role name is: {{ role.name }}</p>
+        <p>Role description is: {{ role.description }}</p>
+      </li>
+    }
+  </ul>
+</div>
