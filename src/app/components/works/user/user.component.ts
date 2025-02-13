@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, effect, inject, OnInit} from '@angular/core';
-import {AsyncPipe} from '@angular/common';
-import {finalize, firstValueFrom, map, Observable} from 'rxjs';
+import {ChangeDetectionStrategy, Component, effect, inject, OnInit, signal} from '@angular/core';
+import {AsyncPipe, NgForOf, NgIf, NgTemplateOutlet} from '@angular/common';
+import {delay, finalize, first, firstValueFrom, map, Observable, tap} from 'rxjs';
 import {QueryRef} from 'apollo-angular';
 import {Button} from 'primeng/button';
 import {RouterLink} from '@angular/router';
@@ -17,7 +17,10 @@ import {log} from 'node:util';
     AsyncPipe,
     Button,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgTemplateOutlet,
+    NgIf,
+    NgForOf
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
@@ -35,9 +38,15 @@ export class UserComponent implements OnInit {
 
   swaggerService = inject(SwaggerTestService);
 
+  $$loading = signal<boolean>(false);
   roles$ = this.swaggerService.getAllRoles()
     .pipe(
-      finalize(() => console.log('Finalize')),
+      first(),
+      tap(() => this.$$loading.set(true)),
+      finalize(() => {
+        this.$$loading.set(false)
+        console.log('Finalize')
+      }),
     )
 
 
@@ -61,7 +70,7 @@ export class UserComponent implements OnInit {
     if (this.form.invalid) return;
 
     const { name, description } = this.form.value;
-    firstValueFrom(this.swaggerService.createRole(name!, description!))
+    firstValueFrom(this.swaggerService.createRoleByJSON(name!, description!))
     this.form.reset()
   }
 

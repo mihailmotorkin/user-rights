@@ -32,13 +32,34 @@
   </label>
   <button (click)="deleteRoleById()">Удалить роль</button>
   <button>Изменить роль</button>
-  <ul>
-    @for (role of roles$ | async; track role.id) {
+    {{ $$loading() }}
+<!--    @if ($$loading()) {-->
+<!--      <div>Загрузка ...</div>-->
+<!--    } @else {-->
+<!--      <div [ngTemplateOutlet]="allRolesTemplate"></div>-->
+<!--    }-->
+
+<!--  <ng-template #allRolesTemplate>-->
+<!--    @for (role of roles$ | async; track role.id) {-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <p>Role id is: {{ role.id }}</p>-->
+<!--          <p>Role name is: {{ role.name }}</p>-->
+<!--          <p>Role description is: {{ role.description }}</p>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    }-->
+<!--  </ng-template>-->
+
+  <div *ngIf="$$loading(); else allRolesTemplate">Загрузка ...</div>
+
+  <ng-template #allRolesTemplate>
+    <ul *ngFor="let role of roles$ | async;">
       <li>
         <p>Role id is: {{ role.id }}</p>
         <p>Role name is: {{ role.name }}</p>
         <p>Role description is: {{ role.description }}</p>
       </li>
-    }
-  </ul>
+    </ul>
+  </ng-template>
 </div>
